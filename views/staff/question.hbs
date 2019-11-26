@@ -1,0 +1,73 @@
+<div class="row text-white banner clearfix">
+  <div class="col-md-4 py-4 content">
+    <h2 class="display-4" style="width: 60%;">Online Personal Guidance And Counselling</h2>
+    <p class="lead my-4"><span class="pr-4">---</span>Designed By{{author}}</p>
+  </div>
+  <div class="col-md-8 py-4 content">
+    <div class="d-flex flex-wrap justify-content-start">
+    {{#each questions}}
+    <div class="card my-card bg-{{this.color}} mb-2 mx-2">
+      <div class="card-header">
+        <span>Student</span>
+        <p>{{this.studentName}}</p>
+        <span>{{this.student.matNo}}</span>
+      </div>
+      <div class="card-body">
+        <span>Title:</span>
+        <p>{{this.title}}</p>
+      </div>
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-secondary schedule-appointment-trigger" data-id="{{this._id}}" data-title="{{this.title}}" data-toggle="modal" data-target="#scheduleAppointment">Reply</button>
+      </div>
+    </div>
+    {{/each}}
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="scheduleAppointment" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title">Reply to student's question</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form action="/staff/question/{{user._id}}" method="POST">
+            <div class="form-group">
+              <label class="mb-2">Question</label>
+              <textarea id="title" name="title" id="" cols="30" rows="2" class="form-control" disabled="disabled"></textarea>
+            </div>
+            <p class="lead">Answer the question</p>
+            <div class="form-group">
+              <label class="mb-2">Answer:</label>
+              <textarea id="answer" name="answer" id="" cols="30" rows="2" class="form-control"></textarea>
+            </div>
+            <input type="text" id="id" name="id" id="hidden" class="hidden">
+            <div class="form-group">
+              <button type="submit" class="btn btn-outline-warning">Send</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  let triggers = document.getElementsByClassName("schedule-appointment-trigger");
+  let titleBox = document.getElementById("title")
+  let idBox = document.getElementById("id");
+
+  for (let i = 0, len = triggers.length; i < len; i++) {
+    triggers[i].onclick = function(e) {
+      titleBox.value = e.target.dataset.title;
+      idBox.value = e.target.dataset.id;
+    }
+  }
+</script>

@@ -1,0 +1,38 @@
+.banner {
+  background: url("/images/b1.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.content {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.round-link {
+  height: 180px;
+  min-width: 180px;
+  border-radius: 90px;
+  vertical-align: middle;
+  font-size: 1.5em;
+  text-decoration: none;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.round-link:hover {
+  text-decoration: none;
+}
+
+.round-link span {
+  width: 80%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.my-card {
+  width: 31%;
+}
+
+.hidden {
+  visibility: hidden;
+}

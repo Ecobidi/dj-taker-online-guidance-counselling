@@ -1,0 +1,61 @@
+<div class="row text-white banner clearfix">
+  <div class="col-md-4 py-4 content">
+    <h2 class="display-4" style="width: 60%;">Online Personal Guidance And Counselling</h2>
+    <p class="lead my-4"><span class="pr-4">---</span>Designed By {{author}}</p>
+  </div>
+  <div class="col-md-8 py-4 content">
+    <button type="button" class="btn btn-success btn-lg my-4" data-toggle="modal" data-target="#addAppointment">
+      Book Appointment
+    </button>
+    <div class="d-flex flex-wrap justify-content-start">
+    {{#each appointments}}
+    <div class="card my-card bg-{{this.color}} mb-2 mx-2">
+      <div class="card-header">
+        {{#if timeScheduled}}
+        Time: {{this.timeScheduled}}
+        {{else}}
+        No Time Yet!
+        {{/if}}
+      </div>
+      <div class="card-body">
+        <span>Title:</span>
+        <p>{{this.title}}</p>
+      </div>
+      {{#if timeScheduled}}
+      <div class="card-footer text-white">
+        Staff: {{this.staffName}}
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="addAppointment" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title">Book a Guidance and Counselling Appointment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form action="/student/appointment/book/{{user._id}}" method="POST">
+            <div class="form-group">
+              <label class="mb-2">Reason for appointment:</label>
+              <textarea name="title" id="" cols="30" rows="4" class="form-control" placeholder="Give a short reason for the appointment..." required="required"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-outline-warning">Book Appointment</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
